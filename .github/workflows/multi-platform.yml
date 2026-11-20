@@ -23,10 +23,12 @@ jobs:
     runs-on: ${{ matrix.config.os }}
 
     steps:
+          steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           submodules: recursive
+
       - name: Install NDK 28
         run: yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "ndk;28.2.13676358"
 
@@ -34,20 +36,9 @@ jobs:
         uses: geode-sdk/build-geode-mod@main
         with:
           android-ndk-version: 28.2.13676358
+          configure-args: -DCMAKE_CXX_FLAGS="-include type_traits"
           combine: true
           target: ${{ matrix.config.target }}
-
-      - name: Build the mod
-        uses: geode-sdk/build-geode-mod@main
-        with:
-          cache: false
-          android-ndk-version: 27.3.13750724
-          sdk: 6.0.0-alpha.1
-          combine: true
-          export-pdb: true
-          export-symbols: true
-          target: ${{ matrix.config.target }}
-          build-config: ${{ matrix.config.build-type || 'Release' }}
 
   package:
     name: Package builds
