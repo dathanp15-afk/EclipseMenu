@@ -16,7 +16,7 @@ jobs:
       matrix:
         config:
           - name: Android64
-            os: ubuntu-latest
+            os: ubuntu-22.04
             target: Android64
 
     name: ${{ matrix.config.name }}
