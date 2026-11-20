@@ -1,3 +1,13 @@
+      - name: Install NDK 28
+        run: yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "ndk;28.2.13676358"
+
+      - name: Build the mod
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          android-ndk-version: 28.2.13676358
+          combine: true
+          target: ${{ matrix.config.target }}
+
 name: Build Eclipse
 
 on:
