@@ -15,27 +15,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - name: Windows
-          os: geode-windows
-          build-type: RelWithDebInfo
-          target: Win64
-
-        - name: macOS
-          os: geode-macos
-          target: MacOS
-
-        - name: Android32
-          os: geode-android
-          target: Android32
-
         - name: Android64
           os: geode-android
           target: Android64
-
-        - name: iOS
-          os: geode-ios
-          target: iOS
-
+          
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
 
@@ -48,7 +31,7 @@ jobs:
         with:
           # bindings: EclipseMenu/bindings
           # bindings-ref: main
-          # sdk: nightly
+          sdk: nightly
           combine: true
           export-pdb: true
           export-symbols: true
